@@ -858,7 +858,7 @@ void Calibrator::optimizeUpToJoint(const std::set<size_t>& optimization_set, Opt
     options.minimizer_progress_to_stdout = false;
     options.max_num_iterations = 100;
     options.num_threads = 4;
-    options.num_linear_solver_threads = 4;
+    // options.num_linear_solver_threads = 4;
 
 #if 0
     for (int j=0;j<jointIndex;j++)

@@ -8,7 +8,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang") # Works for Clang and AppleClang
 endif()
 
 find_package(Eigen3 REQUIRED NO_MODULE)
-find_package(OpenCV REQUIRED)
+find_package( OpenCV REQUIRED core imgproc calib3d optflow highgui)
 
 # Boost
 find_package(Boost COMPONENTS filesystem system program_options REQUIRED) 
