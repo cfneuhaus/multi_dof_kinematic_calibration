@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 3.0)
 project(multi_dof_kinematic_calibration_project)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang") # Works for Clang and AppleClang
@@ -33,8 +35,9 @@ add_library(multi_dof_kinematic_calibration_lib
                include/multi_dof_kinematic_calibration/CalibrationDataIO.h
                include/multi_dof_kinematic_calibration/DebugVis.h)
            
-set_property(TARGET multi_dof_kinematic_calibration_lib PROPERTY CXX_STANDARD 11)
-set_property(TARGET multi_dof_kinematic_calibration_lib PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET multi_dof_kinematic_calibration_lib PROPERTY CXX_STANDARD 17)
+set_property(TARGET multi_dof_kinematic_calibration_lib PROPERTY CXX_STANDARD_REQUIRED YES)
+set_property(TARGET multi_dof_kinematic_calibration_lib PROPERTY CXX_EXTENSIONS NO)
 
 target_include_directories(multi_dof_kinematic_calibration_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
                     ${Boost_INCLUDE_DIRS})
@@ -42,7 +45,7 @@ target_include_directories(multi_dof_kinematic_calibration_lib PUBLIC ${CMAKE_CU
 target_link_libraries(multi_dof_kinematic_calibration_lib PUBLIC
                       ${OpenCV_LIBS}
                       ${Boost_LIBRARIES}
-                      ${GLOG_LIBRARY}
+                      ceres
                       Eigen3::Eigen
                       ${FLEP_PACKAGE_DEPS})
 
@@ -50,8 +53,9 @@ target_link_libraries(multi_dof_kinematic_calibration_lib PUBLIC
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED YES)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_EXTENSIONS NO)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
                     ${Boost_INCLUDE_DIRS})
